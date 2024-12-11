@@ -1,6 +1,6 @@
 import type { AppBindings } from './lib/types'
 import { OpenAPIHono } from '@hono/zod-openapi'
-
+import { apiReference } from '@scalar/hono-api-reference'
 import packageJson from '../package.json' assert { type: 'json' }
 import env from './env'
 import { errorHandler } from './middleware/error'
@@ -10,15 +10,13 @@ import { router } from './routes'
 
 const version = `v${packageJson.version.split('.')[0]}` || 'v1'
 
-const appWithoutBasepath = new OpenAPIHono<AppBindings>(
+const app = new OpenAPIHono<AppBindings>(
   {
     strict: false, // This will allow for the paths /hello and /hello/ to be the same endpoint
   },
 )
 
-appWithoutBasepath.use(useFavicon(env.FAVICON_EMOJI)) // Use emoji as favicon
-
-const app = appWithoutBasepath.basePath(`/api/${version}`) // Set base path for all api endpoints
+app.use(useFavicon(env.FAVICON_EMOJI)) // Use emoji as favicon
 
 // Global middleware
 app.use('*', logger())
@@ -30,12 +28,35 @@ app.notFound((c) => {
 })
 
 // Register routes
-app.route('/', router)
+app.route(`api/${version}`, router)
 
-app.get('/error', (c) => {
-  c.status(500)
-  c.var.logger.error('This is a test error message')
-  throw new Error('Internal Server Error - This is a custom test error message')
-})
+// OpenAPI specification
+const openApiDoc = {
+  openapi: '3.0.0',
+  info: {
+    title: 'Your API',
+    version: packageJson.version,
+    description: 'API Documentation',
+  },
+  servers: [
+    {
+      url: `/api/${version}`,
+      description: 'Current version',
+    },
+  ],
+}
+
+// Add the raw OpenAPI JSON endpoint
+app.doc('/openapi.json', openApiDoc)
+
+// Add Scalar API Reference at /docs
+app.get('/docs', apiReference({
+  theme: 'deepSpace',
+  pageTitle: 'API Docs',
+  spec: {
+    url: '/openapi.json',
+  },
+  layout: 'modern', // 'modern' or 'classic'(looks like swagger)
+}))
 
 export { app }
