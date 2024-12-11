@@ -15,6 +15,7 @@ const EnvSchema = z.object({
     'debug',
     'trace',
   ]).default('debug'),
+  FAVICON_EMOJI: z.string().default('🌐'),
 })
 
 // eslint-disable-next-line custom/no-bun-env
