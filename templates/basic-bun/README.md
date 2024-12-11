@@ -9,3 +9,31 @@ This repository contains a basic template for a web application using [Hono](htt
 - **ESLint**: A static analysis tool for finding problems in your JavaScript code. It can help you catch errors and enforce coding standards.
 - **Prettier**: An opinionated code formatter that can help you ensure your code is consistently styled.
 - **TypeScript**: A typed superset of JavaScript that compiles to plain JavaScript. It can help you catch errors at compile time and improve the maintainability of your code.
+
+## Clone this template
+
+With degit (simplest):
+
+```bash
+npx degit SindreSau/hono-templates/templates/basic-bun <project-name>
+```
+
+With github cli (common):
+
+```bash
+gh repo clone SindreSau/hono-templates/templates/basic-bun <project-name>
+```
+
+## Run the project
+
+1. Install the dependencies:
+
+```bash
+bun install
+```
+
+2. Run the project:
+
+```bash
+bun run dev
+```
