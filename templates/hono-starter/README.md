@@ -1,4 +1,4 @@
-# basic-bun Hono Template
+# hono-starter Hono Template
 
 This repository contains a basic template for a web application using [Hono](https://hono.dev/) and [Bun](https://bun.sh/). This template is designed to provide a quick start for your project, with some additional features that make development easier and more efficient.
 

@@ -14,4 +14,4 @@ gh repo clone SindreSau/hono-templates/templates/<template-name> <project-name>
 ```
 
 ## Templates
-- [basic-bun](./templates/basic-bun/README.md) - The essentials to set up a bun server with Hono.
+- [hono-starter](./templates/hono-starter/README.md) - The essentials to set up a bun server with Hono.
