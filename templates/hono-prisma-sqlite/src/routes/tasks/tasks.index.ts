@@ -1,9 +1,10 @@
 import { createRouter } from '@/lib/create-router'
 
-import { list } from './tasks.handlers'
+import * as handlers from './tasks.handlers'
 import * as tasks from './tasks.routes'
 
 const tasksRouter = createRouter()
-  .openapi(tasks.list, list)
+  .openapi(tasks.list, handlers.list)
+  .openapi(tasks.create, handlers.create)
 
 export default tasksRouter
