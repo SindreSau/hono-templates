@@ -60,3 +60,7 @@ Thumbs.db
 *.der
 *.key
 *.pem
+
+
+# allow specific files
+!.env.example

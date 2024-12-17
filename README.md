@@ -15,3 +15,4 @@ gh repo clone SindreSau/hono-templates/templates/<template-name> <project-name>
 
 ## Templates
 - [hono-starter](./templates/hono-starter/README.md) - The essentials to set up a bun server with Hono.
+- [hono-prisma-sqlite](./templates/hono-prisma-sqlite/README.md) - A bun server with Hono, Prisma, and SQLite.
